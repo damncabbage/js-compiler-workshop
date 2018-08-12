@@ -1,0 +1,12 @@
+{
+  "name": "js-compiler-workshop",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "../support/loop.sh",
+    "peek": "node solution.js"
+  },
+  "author": "Rob Howard <rob@robhoward.id.au>",
+  "license": "Apache-2.0"
+}
