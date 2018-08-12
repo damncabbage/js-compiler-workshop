@@ -157,6 +157,9 @@ function tokensToAst(inputTokens) {
   function parseProgram() {
     const declarations = [];
     const returningExpression = parseReturningExpression();
+    if (tokens.length != 0) {
+      throw new Error(`There are still unprocessed tokens left! ${inspect(tokens)}`);
+    }
     return programNode(declarations, returningExpression);
   }
 

@@ -194,10 +194,15 @@ function tokensToAst(inputTokens) {
 
   function parseProgram() {
     const declarations = [];
+
     while (peekIs("letKeyword", 1)) {
       declarations.push(parseDeclaration());
     }
+
     const expr = parseReturningExpression();
+    if (tokens.length != 0) {
+      throw new Error(`There are still unprocessed tokens left! ${inspect(tokens)}`);
+    }
     return programNode(declarations, expr);
   }
 

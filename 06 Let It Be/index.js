@@ -209,8 +209,11 @@ function tokensToAst(inputTokens) {
     // variable declarations if you find them, pushing them onto
     // the declarations variable above.
     //
- 
+
     const expr = parseReturningExpression();
+    if (tokens.length != 0) {
+      throw new Error(`There are still unprocessed tokens left! ${inspect(tokens)}`);
+    }
     return programNode(declarations, expr);
   }
 
