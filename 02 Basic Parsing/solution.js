@@ -23,7 +23,7 @@ function stringToTokens(input) {
     },
     {
       regex: /\)/,
-      token: "parenClosed"
+      token: "parenClose"
     },
     {
       regex: /,/,
@@ -143,7 +143,7 @@ function tokensToAst(inputTokens) {
     const first = parseInt(consume("literalNumber").capture, 10);
     consume("comma");
     const second = parseInt(consume("literalNumber").capture, 10);
-    consume("parenClosed");
+    consume("parenClose");
     consume("semicolon");
 
     // TODO: Replace this with:

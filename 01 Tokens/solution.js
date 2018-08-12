@@ -23,7 +23,7 @@ function stringToTokens(input) {
     },
     {
       regex: /\)/,
-      token: "parenClosed"
+      token: "parenClose"
     },
     {
       regex: /,/,

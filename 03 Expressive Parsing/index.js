@@ -18,7 +18,7 @@ function stringToTokens(input) {
     },
     {
       regex: /\)/,
-      token: "parenClosed"
+      token: "parenClose"
     },
     {
       regex: /,/,
@@ -181,7 +181,7 @@ function tokensToAst(inputTokens) {
     // Do we have any args? First thing to check is if our "("
     // is immediately followed by ")" in the token stream.
     const args = [];
-    if (!peekIs("parenClosed", 1)) {
+    if (!peekIs("parenClose", 1)) {
       // So we _don't_ have a closed parenthesis; the only valid
       // thing we could look for here is an expression (eg.
       // a number, or another function call).
@@ -193,7 +193,7 @@ function tokensToAst(inputTokens) {
       // pushing them all onto the "args" array.
 
     }
-    consume("parenClosed");
+    consume("parenClose");
     return functionCallNode(funcIdent, args);
   }
 

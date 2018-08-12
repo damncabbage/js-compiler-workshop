@@ -20,7 +20,7 @@ add(1, 2);
   { type: 'literalNumber', capture: '1' },
   { type: 'comma', capture: undefined },
   { type: 'literalNumber', capture: '2' },
-  { type: 'parenClosed', capture: undefined },
+  { type: 'parenClose', capture: undefined },
   { type: 'semicolon', capture: undefined } ]
 ```
 

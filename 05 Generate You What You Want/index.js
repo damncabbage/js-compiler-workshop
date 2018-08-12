@@ -18,7 +18,7 @@ function stringToTokens(input) {
     },
     {
       regex: /\)/,
-      token: "parenClosed"
+      token: "parenClose"
     },
     {
       regex: /,/,
@@ -174,14 +174,14 @@ function tokensToAst(inputTokens) {
     // Do we have any args? First thing to check is if our "("
     // is immediately followed by ")" in the token stream.
     const args = [];
-    if (!peekIs("parenClosed", 1)) {
+    if (!peekIs("parenClose", 1)) {
       args.push(parseExpression());
       while (peekIs("comma", 1)) {
         consume("comma");
         args.push(parseExpression());
       }
     }
-    consume("parenClosed");
+    consume("parenClose");
     return functionCallNode(funcIdent, args);
   }
 
