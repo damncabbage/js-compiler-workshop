@@ -15,7 +15,9 @@ function stringToTokens(input) {
   // EXERCISE:
   // Add the rest of the token types to this list to support
   // tokenising the statement "add(1, 2);".
-  // (More token types can go above and below the existing rules.)
+  // (More token types can go above the existing rules.
+  // And don't worry what to call the token names; just come up with something
+  // and we'll pick a proper name for next exercise.)
   const tokenizerRules = [
     {
       regex: /\(/,
