@@ -1,3 +1,4 @@
+require('pretty-error').start().skipNodeFiles();
 const { inspect } = require("util");
 const stopHere = () => { console.log("\n\n... Stopping here."); process.exit(0); }
 

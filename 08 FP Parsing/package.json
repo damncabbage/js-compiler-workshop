@@ -10,6 +10,7 @@
   "author": "Rob Howard <rob@robhoward.id.au>",
   "license": "Apache-2.0",
   "dependencies": {
-    "eulalie": "../support/eulalie"
+    "eulalie": "../support/eulalie",
+    "pretty-error": "^2.1.1"
   }
 }

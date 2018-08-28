@@ -7,5 +7,8 @@
     "start": "../support/loop.sh"
   },
   "author": "Rob Howard <rob@robhoward.id.au>",
-  "license": "Apache-2.0"
+  "license": "Apache-2.0",
+  "dependencies": {
+    "pretty-error": "^2.1.1"
+  }
 }

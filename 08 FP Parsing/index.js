@@ -1,3 +1,4 @@
+require('pretty-error').start().skipNodeFiles();
 const { inspect } = require("util");
 
 // Let's pull in Eulalie for the tokeniser.
