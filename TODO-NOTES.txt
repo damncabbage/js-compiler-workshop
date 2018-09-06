@@ -7,6 +7,10 @@ X Q6 else needs revisiting (fall-throw never hit)
 x Not clear what to name the 01 token new tokens
 ? Ordering of token rules too hinty
 - Add regex guide (or consider revising)
++      regex: /(...)/, // If you don't know regexes, please
++                      // put up your hand and say hi. They're
++                      // not important to the "compiler" bit
++                      // of this workshop. 😅
 
 - Q3 needs deep inspect, and a test for the returned result as well. Maybe
   always return the functionCallNode() instead of null, or...
