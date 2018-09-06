@@ -1,0 +1,12 @@
+x parenOpen / Closed wtf come on
+x tokens left in parse stream
+x Answers left in Q4
+X Q6 else needs revisiting (fall-throw never hit)
+? if/while needs refactoring in 02 parsing
+
+x Not clear what to name the 01 token new tokens
+? Ordering of token rules too hinty
+- Add regex guide (or consider revising)
+
+- Q3 needs deep inspect, and a test for the returned result as well. Maybe
+  always return the functionCallNode() instead of null, or...
