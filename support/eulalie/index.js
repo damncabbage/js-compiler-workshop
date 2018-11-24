@@ -13,6 +13,7 @@ exports.stream = stream;
 exports.parse = parse;
 exports.makeParser = makeParser;
 exports.seq = seq;
+exports.chain = chain;
 exports.either = either;
 exports.cut = cut;
 exports.unit = unit;
@@ -633,6 +634,21 @@ let spaces1 = exports.spaces1 = expected(many1(space), "whitespace");
 let notSpaces = exports.notSpaces = many(sat(not(isSpace)));
 /** Parses one or more non-whitespace characters. */
 let notSpaces1 = exports.notSpaces1 = expected(many1(sat(not(isSpace))), "one or more non-whitespace characters");
+
+function chain(...parsersThenCallback) {
+  return parsersThenCallback.reduce((newParser, parserOrCallback) => {
+    if (parserOrCallback.constructor == Function) {
+      // Callback
+      return seq(newParser, parserOrCallback);
+    } else {
+      // Parser
+      return seq(newParser, () => {
+        return parserOrCallback;
+      })
+    }
+  });
+}
+
 
 /**
  * Given a list of parsers which return string values, builds a parser which

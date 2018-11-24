@@ -4,13 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "../support/loop.sh",
+    "start": "../node_modules/.bin/watch 'npm test --silent' . --ignoreDotFiles",
+    "test": "node index.js",
     "peek": "node solution.js"
   },
   "author": "Rob Howard <rob@robhoward.id.au>",
   "license": "Apache-2.0",
   "dependencies": {
-    "eulalie": "^2.5.3",
-    "pretty-error": "^2.1.1"
   }
 }

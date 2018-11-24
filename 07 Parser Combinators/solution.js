@@ -4,7 +4,7 @@ const stopHere = () => { console.log("\n\n... Stopping here."); process.exit(0);
 
 
 // We're going to use a Parser Combinator library called Eulalie.
-const p = require("eulalie");
+const p = require("../support/eulalie");
 
 
 // This is a parser. It's a value that represents the idea of

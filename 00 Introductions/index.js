@@ -57,13 +57,23 @@ function astToJs(ast) {
     case "programNode":
       return `
         var result = (function(){
-          return null;
+          return null; // TODO: generate JS
         })();
         console.log(result);
       `;
     default:
       throw new Error(`Unknown type ${ast.type} for AST chunk: ${inspect(ast)}`);
   }
+}
+
+const runtime = `
+  function add(x,y) {
+    return x + y;
+  };
+`;
+
+function execute(jsString, resultHandler) {
+  eval(jsString);
 }
 
 
@@ -74,21 +84,22 @@ function astToJs(ast) {
 //                         //
 /////////////////////////////
 
-const input = `
-  add(1, 2);
-`.trim();
-const tokens = stringToTokens(input);
-const ast = tokensToAst(tokens);
+function example() {
+  const input = `
+    add(1, 2);
+  `.trim();
+  const tokens = stringToTokens(input);
+  const ast = tokensToAst(tokens);
+  const generated = astToJs(ast);
+  const js = runtime + "\n" + generated;
 
-const runtime = `
-  function add(x,y) { return x + y; };
-`;
-const generated = astToJs(ast);
-const js = runtime + "\n" + generated;
+  console.log("TOKENS:\n", tokens, "\n");
+  console.log("AST:\n", inspect(ast), "\n");
+  console.log("JS:\n", js, "\n");
 
-console.log("TOKENS:\n", tokens, "\n");
-console.log("AST:\n", inspect(ast), "\n");
-console.log("JS:\n", js, "\n");
+  console.log("EVAL:");
+  execute(js, function(x) { console.log(x) });
+}
 
-console.log("EVAL:");
-(function(){ eval(js); })();
+module.exports = { stringToTokens, tokensToAst, astToJs, runtime, execute };
+if (require.main === module) example();

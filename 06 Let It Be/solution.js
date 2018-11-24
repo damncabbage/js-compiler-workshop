@@ -225,7 +225,7 @@ function astToJs(ast) {
           ${ast.declarations.map(d => astToJs(d)).join("\n")}
           return (${astToJs(ast.returningExpression)});
         })();
-        console.log(result);
+        resultHandler(result);
       `;
     case "functionCallNode":
       const args = ast.args.map(a => astToJs(a)).join(", ");
@@ -233,12 +233,22 @@ function astToJs(ast) {
     case "variableReferenceNode":
       return ast.identifier;
     case "variableDeclarationNode":
-      return `const ${ast.identifier} = ${astToJs(ast.expression)};`;
+      return `var ${ast.identifier} = ${astToJs(ast.expression)};`;
     case "numberNode":
       return ast.number.toString();
     default:
       throw new Error(`Unknown type ${ast.type} for AST chunk: ${inspect(ast)}`);
   }
+}
+
+const runtime = `
+  function add(x,y) {
+    return x + y;
+  };
+`;
+
+function execute(jsString, resultHandler) {
+  eval(jsString);
 }
 
 
@@ -248,24 +258,26 @@ function astToJs(ast) {
 //                         //
 /////////////////////////////
 
-const input = `
-  let one = 1;
-  let two = 2;
-  let three = add(one, two);
-  add(1, add(one, add(1, three)));
-`.trim();
-const tokens = stringToTokens(input);
-const ast = tokensToAst(tokens);
+function example() {
+  const input = `
+    let one = 1;
+    let two = 2;
+    let three = add(one, two);
+    add(1, add(one, add(1, three)));
+  `.trim();
 
-const runtime = `
-  function add(x,y) { return x + y; };
-`;
-const generated = astToJs(ast);
-const js = runtime + "\n" + generated;
+  const tokens = stringToTokens(input);
+  const ast = tokensToAst(tokens);
+  const generated = astToJs(ast);
+  const js = runtime + "\n" + generated;
 
-console.log("TOKENS:\n", tokens, "\n");
-console.log("AST:\n", inspect(ast), "\n");
-console.log("JS:\n", js, "\n");
+  console.log("TOKENS:\n", tokens, "\n");
+  console.log("AST:\n", inspect(ast), "\n");
+  console.log("JS:\n", js, "\n");
 
-console.log("EVAL:");
-(function(){ eval(js); })();
+  console.log("EVAL:");
+  execute(js, function(x) { console.log(x) });
+}
+
+module.exports = { stringToTokens, tokensToAst, astToJs, runtime, execute };
+if (require.main === module) example();

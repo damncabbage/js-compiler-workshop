@@ -179,7 +179,7 @@ function astToJs(ast) {
     case "programNode":
       return `
         var result = (function(){
-          return null;
+          return null; // TODO: generate JS
         })();
         console.log(result);
       `;
@@ -188,6 +188,15 @@ function astToJs(ast) {
   }
 }
 
+const runtime = `
+  function add(x,y) {
+    return x + y;
+  };
+`;
+
+function execute(jsString, resultHandler) {
+  eval(jsString);
+}
 
 
 /////////////////////////////
@@ -196,21 +205,23 @@ function astToJs(ast) {
 //                         //
 /////////////////////////////
 
-const input = `
-  add(1, 2);
-`.trim();
-const tokens = stringToTokens(input);
-const ast = tokensToAst(tokens);
+function example() {
+  const input = `
+    add(1, 2);
+  `.trim();
 
-const runtime = `
-  function add(x,y) { return x + y; };
-`;
-const generated = astToJs(ast);
-const js = runtime + "\n" + generated;
+  const tokens = stringToTokens(input);
+  const ast = tokensToAst(tokens);
+  const generated = astToJs(ast);
+  const js = runtime + "\n" + generated;
 
-console.log("TOKENS:\n", tokens, "\n");
-console.log("AST:\n", inspect(ast), "\n");
-console.log("JS:\n", js, "\n");
+  console.log("TOKENS:\n", tokens, "\n");
+  console.log("AST:\n", inspect(ast), "\n");
+  console.log("JS:\n", js, "\n");
 
-console.log("EVAL:");
-(function(){ eval(js); })();
+  console.log("EVAL:");
+  execute(js, function(x) { console.log(x) });
+}
+
+module.exports = { stringToTokens, tokensToAst, astToJs, runtime, execute };
+if (require.main === module) example();

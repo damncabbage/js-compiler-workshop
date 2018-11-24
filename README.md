@@ -13,4 +13,7 @@ We'll be stepping through:
 
 This workshop is for people who are already somewhat familiar with JavaScript (just the language itself, not any particular library or framework).
 
-To get going you only need this repository, a Terminal / Console, Node.js 8+, and a text editor of your choice.
+To get going you only need this repository, a Terminal / Console, Node.js 8+, and a text editor of your choice. If you'd like, Visual Studio Code is an editor with good JavaScript support out of the box.
+
+
+I'd recommend using the command-line (eg. with iTerm) and, for each exercise, `cd` into the exercise directory and run commands from there. Each exercise has instructions in the `README.md` file, eg. detailing what to do, how to run commands, etc.

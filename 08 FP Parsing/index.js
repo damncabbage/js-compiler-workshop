@@ -2,7 +2,7 @@ require('pretty-error').start().skipNodeFiles();
 const { inspect } = require("util");
 
 // Let's pull in Eulalie for the tokeniser.
-const p = require("eulalie");
+const p = require("../support/eulalie");
 
 
 ////////////////////////
@@ -22,7 +22,7 @@ function stringToTokens(input) {
 
   const tokenizerRules = [
     {
-      // p.str(...) takes a list of parsers, and sticks them together, returning
+      // p.str(...) takes a list of parsers, and combines them together, returning
       // whatever combined string was matched.
       // (We're then throwing the result away with our ignoreResult combinator above. :] )
       match: ignoreResult(p.str([

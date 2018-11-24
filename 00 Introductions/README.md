@@ -22,10 +22,8 @@ To test out this bare-bones code, open a terminal and run:
 
 ```
 cd "00 Introductions"
-npm start
+node index.js
 ```
-
-(The code will run, and the result will sit there until you hit enter. To exit, hit `Ctrl C`.)
 
 You should see something that looks like:
 
@@ -48,3 +46,11 @@ JS:
 EVAL:
  null
 ```
+
+Later exercises will have tests, so to start the test runner, use:
+
+```
+npm start
+```
+
+(The test runner will run, and the result will sit there until you hit enter. To exit, hit `Ctrl C`.)

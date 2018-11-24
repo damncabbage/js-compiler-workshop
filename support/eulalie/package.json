@@ -26,13 +26,6 @@
   "author": {
     "name": "Bodil Stokke"
   },
-  "babel": {
-    "plugins": [],
-    "presets": [
-      "es2015-node5",
-      "stage-2"
-    ]
-  },
   "bugs": {
     "url": "https://github.com/bodil/eulalie/issues"
   },
@@ -257,14 +250,6 @@
     "type": "git",
     "url": "git+https://github.com/bodil/eulalie.git"
   },
-  "scripts": {
-    "check": "npm run lint && npm test",
-    "compile": "babel src --out-dir .",
-    "doc": "rm -rf doc && jsdoc -c jsdoc.json",
-    "lint": "eslint src test",
-    "prepublish": "npm run compile",
-    "test": "mocha --compilers js:babel-register",
-    "watch-test": "mocha --compilers js:babel-register -w"
-  },
+  "scripts": {},
   "version": "2.5.3"
 }

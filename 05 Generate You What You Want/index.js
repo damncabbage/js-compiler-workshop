@@ -240,25 +240,36 @@ function astToJs(ast) {
 //                         //
 /////////////////////////////
 
-// EXERCISE:
-// When you've finished the above, change this example to:
-//   add(1, add(2, 3));
-// ... and see if it works!
-const input = `
-  add(1, 2);
-`.trim();
-const tokens = stringToTokens(input);
-const ast = tokensToAst(tokens);
+function run() {
+  const input = `
+    add(1, add(2, 3));
+  `.trim();
+  const tokens = stringToTokens(input);
+  const ast = tokensToAst(tokens);
 
-const runtime = `
-  function add(x,y) { return x + y; };
-`;
-const generated = astToJs(ast);
-const js = runtime + "\n" + generated;
+  const runtime = `
+    function add(x,y) { return x + y; };
+  `;
+  const generated = astToJs(ast);
+  const code = runtime + "\n" + generated;
 
-console.log("TOKENS:\n", tokens, "\n");
-console.log("AST:\n", inspect(ast), "\n");
-console.log("JS:\n", js, "\n");
+  console.log("TOKENS:\n", tokens, "\n");
+  console.log("AST:\n", inspect(ast), "\n");
+  console.log("CODE:\n", code, "\n");
 
-console.log("EVAL:");
-(function(){ eval(js); })();
+  console.log("EVAL:");
+
+  // EXERCISE: replace this with, say, "ruby", or the interpreter of
+  // whatever language you're generating above.
+  const interpreter = "node";
+
+  var spawn = require("child_process").spawn;
+  var child = spawn("/usr/bin/env", [interpreter], {
+    stdio: ["pipe", "inherit", "inherit"]
+  });
+  child.stdin.write(code);
+  child.stdin.end();
+}
+
+module.exports = { stringToTokens, tokensToAst, astToJs };
+if (require.main === module) run();

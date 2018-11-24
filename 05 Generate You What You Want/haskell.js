@@ -240,26 +240,37 @@ main = putStrLn (show result)
 //                         //
 /////////////////////////////
 
-const input = `
-  add(1, add(2, 1));
-`.trim();
-const tokens = stringToTokens(input);
-const ast = tokensToAst(tokens);
+function run() {
+  const input = `
+    add(1, add(2, 3));
+  `.trim();
+  const tokens = stringToTokens(input);
+  const ast = tokensToAst(tokens);
 
-const runtime = `
+  const runtime = `
 add :: Int -> Int -> Int
 add x y = x + y
 `.trim();
-const generated = astToHaskell(ast);
-const hs = runtime + "\n" + generated;
+  const generated = astToHaskell(ast);
+  const code = runtime + "\n" + generated;
 
-console.log("TOKENS:\n", tokens, "\n");
-console.log("AST:\n", inspect(ast), "\n");
-console.log("Haskell:", "\n" + hs, "\n");
+  console.log("TOKENS:\n", tokens, "\n");
+  console.log("AST:\n", inspect(ast), "\n");
+  console.log("CODE:\n", code, "\n");
 
-var spawn = require("child_process").spawn;
-var child = spawn("/usr/bin/env", ["runhaskell"], { // Replace with, say, "ruby".
-  stdio: ["pipe", "inherit", "inherit"]
-});
-child.stdin.write(hs);
-child.stdin.end();
+  console.log("EVAL:");
+
+  // EXERCISE: replace this with, say, "ruby", or the interpreter of
+  // whatever language you're generating above.
+  const interpreter = "runhaskell";
+
+  var spawn = require("child_process").spawn;
+  var child = spawn("/usr/bin/env", [interpreter], {
+    stdio: ["pipe", "inherit", "inherit"]
+  });
+  child.stdin.write(code);
+  child.stdin.end();
+}
+
+module.exports = { stringToTokens, tokensToAst, astToHaskell };
+if (require.main === module) run();
