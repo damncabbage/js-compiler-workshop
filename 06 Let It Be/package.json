@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "../node_modules/.bin/jest --watch",
-    "test": "../node_modules/.bin/jest",
+    "start": "node ../node_modules/node/bin/jest --watch",
+    "test": "node ../node_modules/node/bin/jest",
     "peek": "node solution.js"
   },
   "author": "Rob Howard <rob@robhoward.id.au>",

@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "../node_modules/.bin/watch 'npm test --silent' . --ignoreDotFiles",
+    "start": "node ../node_modules/watch/cli.js \"npm test --silent\" . --ignoreDotFiles",
     "test": "node index.js",
     "peek": "node solution.js"
   },
